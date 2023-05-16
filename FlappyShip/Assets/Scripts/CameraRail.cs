@@ -33,7 +33,7 @@ public class CameraRail : MonoBehaviour
             float t = elapsed / duration;
 
             transform.position = Vector3.Lerp(startPos, endPos, t);
-            transform.rotation = Quaternion.Lerp(startRotation, endRotation, t);
+            //transform.rotation = Quaternion.Lerp(startRotation, endRotation, t);
             camera.orthographicSize = Mathf.Lerp(startSize, endSize, t);
 
             yield return null;
@@ -41,7 +41,7 @@ public class CameraRail : MonoBehaviour
 
         // Ensure it's fully moved to the end position.
         transform.position = endPos;
-        transform.rotation = endRotation;
+        //transform.rotation = endRotation;
     }
 }
 
