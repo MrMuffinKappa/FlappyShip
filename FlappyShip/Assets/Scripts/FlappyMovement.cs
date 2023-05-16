@@ -11,10 +11,13 @@ public class FlappyMovement : MonoBehaviour
     private float verticalVelocity;
     private Rigidbody rb;
 
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.isKinematic = true;
+        StartCoroutine(StartGame());
     }
 
     void Update()
@@ -27,10 +30,15 @@ public class FlappyMovement : MonoBehaviour
         if (isEnable)
         {
         verticalVelocity -= gravityForce * Time.deltaTime;
-
         float newPosX = transform.position.x - verticalVelocity * Time.deltaTime;
 
-        rb.MovePosition(new Vector2(Mathf.Clamp(newPosX, -5, 5), transform.position.y));
+        rb.MovePosition(new Vector2(Mathf.Clamp(newPosX, -1 * gravityForce, gravityForce), transform.position.y));
         }
+    }
+
+    public IEnumerator StartGame()
+    {
+        yield return new WaitForSeconds(1);
+        isEnable = true;
     }
 }
