@@ -7,8 +7,7 @@ public class FlappyMovement : MonoBehaviour
     public float flapForce = 5f;
     public float gravityForce = 9.8f;
     public bool isEnable = true;
-    public float maxRotate = 40f;
-    public float rotateForce = 40f;
+    public bool isGameOver = false;
     public AnimationCurve rollCurve;
     public float _currentRoll, _targetRoll;
 
@@ -31,9 +30,13 @@ public class FlappyMovement : MonoBehaviour
     {
         if (Input.GetMouseButton(0) || Input.GetButtonDown("Jump"))
         {
-            verticalVelocity = flapForce;
-            _currentRoll = 0;
-            _targetRoll = 1;
+            if (!isGameOver)
+            {
+                verticalVelocity = flapForce;
+                _currentRoll = 0;
+                _targetRoll = 1;
+
+            }
 
         }
 
@@ -54,6 +57,14 @@ public class FlappyMovement : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         isEnable = true;
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        if (collider.gameObject.tag == "Barrel")
+        {
+            isGameOver = true;
+        }
     }
 
 }
